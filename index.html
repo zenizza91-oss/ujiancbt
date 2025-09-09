@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ujian Anti-Cheat</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="login">
+    <h2>Masuk Ujian</h2>
+    <input type="text" id="nama" placeholder="Nama Siswa">
+    <input type="text" id="kode" placeholder="Kode Ujian">
+    <button onclick="mulaiUjian()">Mulai</button>
+  </div>
+
+  <div id="ujian" style="display:none;">
+    <h2>Ujian Online</h2>
+    <p id="timer">Sisa waktu: <span id="waktu">00:00</span></p>
+    <form id="soalForm">
+      <p>1. Ibu kota Indonesia adalah?</p>
+      <label><input type="radio" name="q1" value="A"> Jakarta</label><br>
+      <label><input type="radio" name="q1" value="B"> Surabaya</label><br>
+
+      <p>2. 2 + 2 = ?</p>
+      <label><input type="radio" name="q2" value="A"> 3</label><br>
+      <label><input type="radio" name="q2" value="B"> 4</label><br>
+      
+      <button type="button" onclick="kirimJawaban()">Kirim Jawaban</button>
+    </form>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
