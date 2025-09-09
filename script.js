@@ -1,41 +1,22 @@
-let peringatanTab = 0;
-let timerInterval;
+function submitJawaban() {
+  const q1 = document.querySelector('input[name="q1"]:checked');
+  const q2 = document.querySelector('input[name="q2"]:checked');
 
-function mulaiUjian() {
-  document.getElementById('login').style.display = 'none';
-  document.getElementById('ujian').style.display = 'block';
-  mulaiTimer(5 * 60); // 5 menit
-  window.addEventListener('blur', deteksiTabPindah);
-}
-
-function mulaiTimer(durasi) {
-  let waktu = durasi;
-  timerInterval = setInterval(() => {
-    let menit = String(Math.floor(waktu / 60)).padStart(2,'0');
-    let detik = String(waktu % 60).padStart(2,'0');
-    document.getElementById('waktu').textContent = `${menit}:${detik}`;
-    if (--waktu < 0) {
-      kirimJawaban();
-    }
-  }, 1000);
-}
-
-function deteksiTabPindah() {
-  peringatanTab++;
-  alert(`⚠️ Jangan pindah tab! (${peringatanTab}x)`);
-  if (peringatanTab >= 3) {
-    alert('Ujian otomatis dikumpulkan karena kecurangan.');
-    kirimJawaban();
+  if (!q1 || !q2) {
+    alert("Harap jawab semua soal!");
+    return;
   }
+
+  let skor = 0;
+  if (q1.value === "4") skor++;
+  if (q2.value === "Jakarta") skor++;
+
+  alert("Skor Anda: " + skor + "/2");
 }
 
-function kirimJawaban() {
-  clearInterval(timerInterval);
-  const data = new FormData(document.getElementById('soalForm'));
-  let hasil = [];
-  for (let [key, val] of data.entries()) {
-    hasil.push(`${key}: ${val}`);
+// Anti-cheat dasar: deteksi pindah tab
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    alert("Anda meninggalkan tab ujian! Harap kembali ke ujian.");
   }
-  alert("Jawaban terkumpul:\n" + hasil.join("\n"));
-  // TODO: kirim ke server via fetch()
-}
+});
